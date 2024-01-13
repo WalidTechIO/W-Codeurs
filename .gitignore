@@ -1,0 +1,9 @@
+/bin/
+/.classpath
+/.settings/
+/doc/
+/build/program.jar
+/build/javafx*
+/build/*Script.*
+/build/launcher/build/
+/build/Output
