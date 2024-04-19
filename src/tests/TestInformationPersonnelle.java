@@ -1,14 +1,12 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import formation.InformationPersonnelle;
 import formation.InformationPersonnelleException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests JUnit de la classe {@link formation.InformationPersonnelle InformationPersonnelle}.
@@ -41,10 +39,9 @@ public class TestInformationPersonnelle {
   /**
    * Ne fait rien apres les tests : a modifier au besoin.
    *
-   * @throws Exception ne peut pas etre levee ici
    */
   @AfterEach
-  void tearDown() throws Exception {}
+  void tearDown() {}
   
   /**
    * Verifie que l'on peut positionner un age de 25 ans.
@@ -80,8 +77,8 @@ public class TestInformationPersonnelle {
    */
   @Test
   void testAdresseNonNull() {
-    assertTrue(infoBasique.getAdresse() != null);
-    assertTrue(infoComplete.getAdresse() != null);
+      assertNotNull(infoBasique.getAdresse());
+      assertNotNull(infoComplete.getAdresse());
   }
   
   /**
@@ -90,7 +87,7 @@ public class TestInformationPersonnelle {
   @Test
   void testSetterAdresseNull() {
     infoComplete.setAdresse(null);
-    assertTrue(infoComplete.getAdresse() != null);
+      assertNotNull(infoComplete.getAdresse());
   }
   
   /**
@@ -103,7 +100,7 @@ public class TestInformationPersonnelle {
     InformationPersonnelle inf = new InformationPersonnelle("Vador", "Dark", null, -30);
     assertEquals(inf.getNom(), "Vador");
     assertEquals(inf.getPrenom(), "Dark");
-    assertTrue(inf.getAdresse() != null);
+      assertNotNull(inf.getAdresse());
     assertTrue(inf.getAge() >= 0);
   }
   
@@ -115,8 +112,6 @@ public class TestInformationPersonnelle {
    */
   @Test
   void testConstructeurException() {
-    assertThrows(InformationPersonnelleException.class, () -> {
-      infoBasique = new InformationPersonnelle("", null);
-    });
+    assertThrows(InformationPersonnelleException.class, () -> infoBasique = new InformationPersonnelle("", null));
   }
 }

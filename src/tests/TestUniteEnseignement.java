@@ -1,12 +1,10 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import formation.UniteEnseignement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests JUnit de la classe {@link formation.UniteEnseignement
@@ -107,16 +105,15 @@ public class TestUniteEnseignement {
   public void testEquals() {
     UniteEnseignement autreUe =
         new UniteEnseignement("Mathematiques", "John Doe");
-    assertTrue(ue.equals(autreUe));
+      assertEquals(ue, autreUe);
   }
   
   /**
    * Teste l'egalite avec un objet de type different.
    */
-  @SuppressWarnings("unlikely-arg-type")
   @Test
   public void testEqualsObjetDifferent() {
-    assertFalse(ue.equals("Mathematiques"));
+      assertNotEquals("Mathematiques", ue);
   }
   
   /**
@@ -126,7 +123,7 @@ public class TestUniteEnseignement {
   public void testEqualsNomDifferents() {
     UniteEnseignement autreUe =
         new UniteEnseignement("Informatique", "John Doe");
-    assertFalse(ue.equals(autreUe));
+      assertNotEquals(ue, autreUe);
   }
   
   /**
@@ -136,7 +133,7 @@ public class TestUniteEnseignement {
   public void testEqualsNomResponsableDifferents() {
     UniteEnseignement autreUe =
         new UniteEnseignement("Mathematiques", "Jane Doe");
-    assertFalse(ue.equals(autreUe));
+      assertNotEquals(ue, autreUe);
   }
   
   /**

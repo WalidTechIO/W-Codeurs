@@ -1,12 +1,13 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import formation.Etudiant;
 import formation.InformationPersonnelle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests JUnit de la classe {@link formation.Etudiant Etudiant}.
@@ -45,9 +46,9 @@ public class TestEtudiant {
   void testConstructeur() {
     InformationPersonnelle infos = etudiant.getInformationPersonnelle();
     assertTrue(infos.equals(this.infos) 
-        && infos.getPrenom() == "John" 
-        && infos.getNom() == "Doe" 
-        && etudiant.getPassword() == "0000" 
+        && Objects.equals(infos.getPrenom(), "John")
+        && Objects.equals(infos.getNom(), "Doe")
+        && Objects.equals(etudiant.getPassword(), "0000")
         && etudiant.getNumeroEtudiant() == 1);
   }
   
@@ -90,7 +91,7 @@ public class TestEtudiant {
   void testRecevoirMessage() {
     String s = "Message";
     etudiant.recevoirMessage(s);
-    assertTrue(etudiant.getMessages().keySet().contains(s));
+    assertTrue(etudiant.getMessages().containsKey(s));
   }
   
   /**
@@ -101,7 +102,7 @@ public class TestEtudiant {
     String s = "Message";
     etudiant.recevoirMessage(s);
     etudiant.marquerMessageLu(s);
-    assertTrue(!etudiant.getMessages().values().contains(false));
+      assertFalse(etudiant.getMessages().containsValue(false));
   }
   
   /**

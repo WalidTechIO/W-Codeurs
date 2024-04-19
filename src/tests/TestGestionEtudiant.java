@@ -1,11 +1,11 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import formation.Application;
 import formation.Etudiant;
@@ -97,9 +97,9 @@ public class TestGestionEtudiant {
   public void testConnexionAvecIdentifiantsInexistants() {
     boolean connexionReussie =
         gestionEtudiant.connexion(9999, "motDePasseIncorrect"); 
-    assertFalse(
-        "La connexion devrait echouer avec des identifiants inexistants.",
-        connexionReussie);
+    assertFalse(connexionReussie,
+        "La connexion devrait echouer avec des identifiants inexistants."
+        );
   }
   
   
@@ -260,9 +260,9 @@ public class TestGestionEtudiant {
     gestionEtudiant.connexion(numEtud2, "MotDePasse2");
     gestionEtudiant.choisirOption(ue);
     boolean choixReussi = gestionEtudiant.choisirOption(ue);
-    assertFalse(
-        "Le choix de l'UE devrait echouer si la capacite maximale est atteinte.",
-        choixReussi);
+    assertFalse(choixReussi,
+        "Le choix de l'UE devrait echouer si la capacite maximale est atteinte."
+        );
   }
   
   
@@ -370,13 +370,13 @@ public class TestGestionEtudiant {
         new InformationPersonnelle(nomLong, prenomAvecCaracteresSpeciaux);
     int numero = gestionEtudiant.inscription(infos, "motDePasse123");
     
-    assertTrue(
-        "Le numero d'etudiant devrait etre positif pour une inscription valide.",
-        numero > 0);
-    assertNotNull("L'etudiant devrait etre ajoute a la liste des etudiants.",
-        gestionEtudiant.getEtudiants().stream()
-            .filter(e -> e.getNumeroEtudiant() == numero).findFirst()
-            .orElse(null));
+    assertTrue(numero > 0,
+        "Le numero d'etudiant devrait etre positif pour une inscription valide.");
+    assertNotNull(gestionEtudiant.getEtudiants().stream()
+                    .filter(e -> e.getNumeroEtudiant() == numero).findFirst()
+                    .orElse(null),
+            "L'etudiant devrait etre ajoute a la liste des etudiants."
+        );
   }
   
   /**
@@ -409,7 +409,7 @@ public class TestGestionEtudiant {
   @Test
   public void testListeTousMessagesCo() throws NonConnecteException {
     gestionEtudiant.connexion(numero, "motDePasse");
-    assertTrue(gestionEtudiant.listeTousMessages().size() == 1);
+    assertEquals(gestionEtudiant.listeTousMessages().size(), 1);
   }
   
   /**
@@ -421,7 +421,7 @@ public class TestGestionEtudiant {
   @Test
   public void testListeMessagesNonLusCo() throws NonConnecteException {
     gestionEtudiant.connexion(numero, "motDePasse");
-    assertTrue(gestionEtudiant.listeMessageNonLus().size() == 1);
+      assertEquals(1, gestionEtudiant.listeMessageNonLus().size());
   }
   
   /**

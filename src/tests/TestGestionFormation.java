@@ -1,10 +1,5 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
 import formation.Application;
 import formation.Etudiant;
 import formation.GestionEtudiant;
@@ -14,6 +9,8 @@ import formation.InformationPersonnelleException;
 import formation.UniteEnseignement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests JUnit de la classe {@link formation.GestionFormation GestionFormation}.
@@ -45,11 +42,9 @@ public class TestGestionFormation {
   
   /**
    * Avant chaque test.
-   *
-   * @throws Exception ne sera pas levee.
    */
   @BeforeEach
-  void setUp() throws Exception {
+  void setUp() {
     app = new Application();
     gf = app.getGestionFormation();
     ge = app.getGestionEtudiant();
@@ -116,12 +111,12 @@ public class TestGestionFormation {
   @Test
   public void testAjouterEnseignementObligatoireEchec() {
     // 1. Tentative d'ajout d'une UE obligatoire (devrait reussir)
-    assertTrue("L'ajout d'une UE obligatoire devrait reussir.",
-        gf.ajouterEnseignementObligatoire(ue));
+    assertTrue(gf.ajouterEnseignementObligatoire(ue),
+            "L'ajout d'une UE obligatoire devrait reussir.");
     
     // 2. Tentative d'ajout de la meme UE obligatoire (devrait echouer)
-    assertFalse("L'ajout de la meme UE obligatoire devrait echouer.",
-        gf.ajouterEnseignementObligatoire(ue));
+    assertFalse(gf.ajouterEnseignementObligatoire(ue),
+            "L'ajout de la meme UE obligatoire devrait echouer.");
   }
   
   /**
@@ -275,7 +270,7 @@ public class TestGestionFormation {
     gf.attribuerAutomatiquementGroupes();
     assertEquals(
         gf.changerGroupe(ge.getEtudiants().stream()
-            .filter(e -> e.getNumeroEtudiant() == 1).findFirst().get(), 2, -1),
+            .filter(e -> e.getNumeroEtudiant() == 1).findFirst().orElse(null), 2, -1),
         -2);
   }
   
@@ -301,7 +296,7 @@ public class TestGestionFormation {
    */
   @Test
   public void testListeEtudiantsGroupeDirige() {
-    assertTrue(gf.listeEtudiantsGroupeDirige(0) == null);
+      assertNull(gf.listeEtudiantsGroupeDirige(0));
   }
   
   /**
@@ -309,7 +304,7 @@ public class TestGestionFormation {
    */
   @Test
   public void testListeEtudiantsGroupePratique() {
-    assertTrue(gf.listeEtudiantsGroupePratique(0) == null);
+      assertNull(gf.listeEtudiantsGroupePratique(0));
   }
   
   /**
@@ -317,7 +312,7 @@ public class TestGestionFormation {
    */
   @Test
   public void testListeEtudiantsOption() {
-    assertTrue(gf.listeEtudiantsOption(ue) == null);
+      assertNull(gf.listeEtudiantsOption(ue));
   }
   
   /**

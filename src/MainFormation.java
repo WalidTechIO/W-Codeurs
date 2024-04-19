@@ -61,7 +61,7 @@ public class MainFormation {
             app.getSave().chargerDonnees(startingFile);
           } catch (IOException e) {
             System.exit(-1);
-          };
+          }
           
         app.run();
         break;
